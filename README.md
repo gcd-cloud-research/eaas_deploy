@@ -1,4 +1,4 @@
-# InefDeploy
+# eaas_deploy
 
 After cloning or to update the projects:
 ```

@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  node-angular:
+    build: .
+    ports:
+      - ${API_PORT_EXTERNAL}:${API_PORT_INTERNAL}
+    container_name: node-react
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    restart: unless-stopped
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+    ports:
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+    volumes:
+      - ./mongodb_data_container:/data/db
+    restart: unless-stopped
